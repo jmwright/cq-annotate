@@ -2,14 +2,14 @@ from math import degrees
 import cadquery as cq
 
 
-def add_assembly_arrows(assy, arrow_size_multiplier=1.0):
+def add_assembly_arrows(assy, arrow_scale_factor=1.0):
     """
     Adds 3D arrows to the assembly at the locations of faces tagged with "arrow".
     Example: `my_object.faces(">Y").tag("arrow")`
 
     Parameters:
         assy - The assembly that may have locations tagged for arrows.
-        arrow_size_multiplier - Allows arrows to be scaled up and down so that they match the size of the
+        arrow_scale_factor - Allows arrows to be scaled up and down so that they match the size of the
 
     Returns:
         The same assembly with the arrows added at the proper location
@@ -24,9 +24,9 @@ def add_assembly_arrows(assy, arrow_size_multiplier=1.0):
             face_loc = cq.Location((face_center.x, face_center.y, face_center.z))
 
             # Create the arrow object
-            tip_circle = 0.5 * arrow_size_multiplier
-            head_circle = 2.5 * arrow_size_multiplier
-            head_length = 10.0 * arrow_size_multiplier
+            tip_circle = 0.5 * arrow_scale_factor
+            head_circle = 2.5 * arrow_scale_factor
+            head_length = 10.0 * arrow_scale_factor
             arrow = cq.Workplane().circle(tip_circle).extrude(head_length, taper=-30)
             arrow = (
                 arrow.faces(">Z").workplane().circle(head_circle).extrude(head_length)
