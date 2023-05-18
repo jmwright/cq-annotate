@@ -30,5 +30,5 @@ assy = add_assembly_arrows(assy, arrow_scale_factor=0.5)
 
 # This only exists so that users running the example in CQ-editor
 # can see the result
-if 'show_object' in globals():
+if "show_object" in globals():
     show_object(assy)
