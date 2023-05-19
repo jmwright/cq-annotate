@@ -29,4 +29,8 @@ from cq_annotate import add_assembly_arrows, explode_assembly
 ## Examples
 
 * [add_assembly_arrows_example.py](./examples/add_assembly_arrows_example.py) - A fully commented example showing a simple example of how to use assembly arrows.
-* [explode_assembly_example.py](./examples/explode_assembly_example.py) - A fully commented example showing how a simple assembly can be set up to explode to show the individual components better.
+
+![Assembly Arrows Example](./docs/images/assembly_arrows_example.png)
+* [explode_assembly_example.py](./examples/explode_assembly_example.py) - A fully commented example showing how a simple assembly can be set up to explode to show the individual components better. In the screenshot below, the two blocks would be touching at the origin if they were not set to be exploded.
+
+![Explode Assembly Example](./docs/images/explode_assembly_example.png)
