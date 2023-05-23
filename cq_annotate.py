@@ -49,8 +49,8 @@ def add_assembly_arrows(assy, arrow_scale_factor=1.0):
                 loc=child.loc * face_loc,
                 color=cq.Color(0.0, 0.0, 0.0, 1.0),
             )
-        except Exception as err:
-            print(err)
+        except Exception:
+            pass
 
     return assy
 
