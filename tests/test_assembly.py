@@ -50,10 +50,16 @@ def test_explode_assembly():
 
     # Add the assembly components
     assy.add(
-        box1, loc=cq.Location((0, 0, 5)), metadata={"explode_loc": cq.Location((0, 0, 10))}, color=cq.Color(1, 0, 0, 1)
+        box1,
+        loc=cq.Location((0, 0, 5)),
+        metadata={"explode_loc": cq.Location((0, 0, 10))},
+        color=cq.Color(1, 0, 0, 1),
     )
     assy.add(
-        box2, loc=cq.Location((0, 0, -5)), metadata={"explode_loc": cq.Location((0, 0, -10))}, color=cq.Color(0, 1, 0, 1)
+        box2,
+        loc=cq.Location((0, 0, -5)),
+        metadata={"explode_loc": cq.Location((0, 0, -10))},
+        color=cq.Color(0, 1, 0, 1),
     )
 
     # Make sure that the assembly children start at the correct positions
