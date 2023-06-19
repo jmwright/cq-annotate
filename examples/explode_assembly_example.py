@@ -2,10 +2,10 @@ import cadquery as cq
 from cq_annotate import explode_assembly
 
 # Create the first assembly component
-box1 = cq.Workplane().workplane(offset=5.0).box(10, 10, 10)
+box1 = cq.Workplane().workplane(offset=0.0).box(10, 10, 10)
 
 # Create a second assembly component to be assembled with the first
-box2 = cq.Workplane().workplane(offset=-5.0).box(10, 10, 10)
+box2 = cq.Workplane().workplane(offset=0.0).box(10, 10, 10)
 
 # The main assembly
 assy = cq.Assembly()
@@ -16,10 +16,10 @@ assy = cq.Assembly()
 # The metadata parameter is required so that cq-annotate knows the
 # direction and amount to translate the exploded assembly components by
 assy.add(
-    box1, metadata={"explode_loc": cq.Location((0, 0, 10))}, color=cq.Color(1, 0, 0, 1)
+    box1, loc=cq.Location((0, 0, 5)), metadata={"explode_loc": cq.Location((0, 0, 10))}, color=cq.Color(1, 0, 0, 1)
 )
 assy.add(
-    box2, metadata={"explode_loc": cq.Location((0, 0, -10))}, color=cq.Color(0, 1, 0, 1)
+    box2, loc=cq.Location((0, 0, -5)), metadata={"explode_loc": cq.Location((0, 0, -10))}, color=cq.Color(0, 1, 0, 1)
 )
 
 # Explode the assembly, which will modify the existing assembly
