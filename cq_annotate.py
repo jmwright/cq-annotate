@@ -1,5 +1,6 @@
 from math import degrees
 import cadquery as cq
+import cairo
 
 
 def add_assembly_arrows(assy, arrow_scale_factor=1.0):
@@ -77,3 +78,27 @@ def explode_assembly(assy):
     for child in assy.children:
         if "explode_loc" in child.metadata:
             child.loc = child.loc * child.metadata["explode_loc"]
+
+
+def add_safety_waring(svg_path, text, use_icon=True):
+    with cairo.SVGSurface(svg_path, 800, 600) as surface:
+        # Setting the background color
+        context = cairo.Context(surface)
+        context.set_source_rgb(0, 0, 0)
+
+        # Approximate text height
+        context.set_font_size(25)
+
+        # Font Style
+        context.select_font_face(
+            "Arial", cairo.FONT_SLANT_NORMAL, cairo.FONT_WEIGHT_NORMAL
+        )
+
+        # Position for the text
+        context.move_to(50, 50)
+
+        # displays the text
+        context.show_text("Safety Warnin")
+
+        # stroke out the color and width property
+        context.stroke()
