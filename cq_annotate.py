@@ -88,7 +88,7 @@ def add_safety_warning(svg_path, text, use_icon=True, font_size=24):
     Adds a safety warning to an SVG file. The warning can be a text message with an optional icon.
     """
 
-     # Load the SVG that we want to annotate
+    # Load the SVG that we want to annotate
     view = sg.fromfile(svg_path)
     view_size = view.get_size()
     view = view.getroot()
@@ -99,7 +99,10 @@ def add_safety_warning(svg_path, text, use_icon=True, font_size=24):
         icon.moveto(5, 5, scale_x=0.4, scale_y=0.4)
 
     # Create an SVG to put the result in
-    fig = sg.SVGFigure(Unit(str(view_size[0].split('.')[0]) + "px"), Unit(str(view_size[1].split('.')[0]) + "px"))
+    fig = sg.SVGFigure(
+        Unit(str(view_size[0].split(".")[0]) + "px"),
+        Unit(str(view_size[1].split(".")[0]) + "px"),
+    )
 
     # Add text labels
     txt1 = sg.TextElement(45, 35, text, size=font_size, weight="bold")

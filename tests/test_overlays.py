@@ -2,6 +2,7 @@ import pytest
 import cadquery as cq
 from cq_annotate import add_safety_warning
 
+
 def test_add_safety_waring():
     # Set up the location of the test SVG and the text to be added
     text = "Safety Warning"
