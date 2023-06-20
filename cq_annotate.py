@@ -1,6 +1,9 @@
+import os
 from math import degrees
 import cadquery as cq
 import cairo
+import svgutils.transform as sg
+from svgutils.compose import Unit
 
 
 def add_assembly_arrows(assy, arrow_scale_factor=1.0):
@@ -80,25 +83,32 @@ def explode_assembly(assy):
             child.loc = child.loc * child.metadata["explode_loc"]
 
 
-def add_safety_waring(svg_path, text, use_icon=True):
-    with cairo.SVGSurface(svg_path, 800, 600) as surface:
-        # Setting the background color
-        context = cairo.Context(surface)
-        context.set_source_rgb(0, 0, 0)
+def add_safety_warning(svg_path, text, use_icon=True, font_size=24):
+    """
+    Adds a safety warning to an SVG file. The warning can be a text message with an optional icon.
+    """
 
-        # Approximate text height
-        context.set_font_size(25)
+     # Load the SVG that we want to annotate
+    view = sg.fromfile(svg_path)
+    view_size = view.get_size()
+    view = view.getroot()
 
-        # Font Style
-        context.select_font_face(
-            "Arial", cairo.FONT_SLANT_NORMAL, cairo.FONT_WEIGHT_NORMAL
-        )
+    if use_icon:
+        cur_dir = os.path.dirname(os.path.realpath(__file__))
+        icon = sg.fromfile(os.path.join(cur_dir, "icons/safety_warning.svg")).getroot()
+        icon.moveto(5, 5, scale_x=0.4, scale_y=0.4)
 
-        # Position for the text
-        context.move_to(50, 50)
+    # Create an SVG to put the result in
+    fig = sg.SVGFigure(Unit(str(view_size[0].split('.')[0]) + "px"), Unit(str(view_size[1].split('.')[0]) + "px"))
 
-        # displays the text
-        context.show_text("Safety Warnin")
+    # Add text labels
+    txt1 = sg.TextElement(45, 35, text, size=font_size, weight="bold")
 
-        # stroke out the color and width property
-        context.stroke()
+    # Build the final SVG
+    imgs = [view, txt1]
+    if use_icon:
+        imgs.append(icon)
+    fig.append(imgs)
+
+    # Save the SVG
+    fig.save(svg_path)
