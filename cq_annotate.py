@@ -1,7 +1,6 @@
 import os
 from math import degrees
 import cadquery as cq
-import cairo
 import svgutils.transform as sg
 from svgutils.compose import Unit
 

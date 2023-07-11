@@ -1,4 +1,3 @@
 cadquery
-pycairo
 pytest
 svgutils
