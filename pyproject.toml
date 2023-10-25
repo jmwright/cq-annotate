@@ -23,6 +23,13 @@ dependencies = [
   "svgutils",
 ]
 
+[project.optional-dependencies]
+dev = [
+  "pytest",
+  "black==19.10b0",
+  "click==8.0.4"
+]
+
 [project.urls]
 "Homepage" = "https://github.com/jmwright/cq-annotate"
 "Bug Tracker" = "https://github.com/jmwright/cq-annotate/issues"
