@@ -35,7 +35,10 @@ def add_assembly_arrows(assy, arrow_scale_factor=1.0):
             head_length = 10.0 * arrow_scale_factor
             arrow = cq.Workplane().circle(tip_circle).extrude(head_length, taper=-30)
             arrow = (
-                arrow.faces(">Z").workplane(centerOption="CenterOfBoundBox").circle(head_circle).extrude(head_length)
+                arrow.faces(">Z")
+                .workplane(centerOption="CenterOfBoundBox")
+                .circle(head_circle)
+                .extrude(head_length)
             )
 
             # Figure out the angle between the normal vector of the face and the length axis of the arrow
@@ -210,9 +213,7 @@ def add_circular_dimensions(obj, arrow_scale_factor=1.0):
         arrow = (
             cq.Workplane(plane_name).circle(tip_circle).extrude(head_length, taper=-30)
         )
-        arrow = (
-            arrow.rotate((0, 0, 0), radial_vec, 90)
-        )
+        arrow = arrow.rotate((0, 0, 0), radial_vec, 90)
         arrow = (
             arrow.faces(extrude_sel)
             .workplane(centerOption="CenterOfBoundBox")
@@ -240,7 +241,11 @@ def add_circular_dimensions(obj, arrow_scale_factor=1.0):
             loc_tup = (lr, tb, offset)
 
         # Create the text that will display the radius value
-        text = cq.Workplane(plane_name).workplane(centerOption="CenterOfBoundBox").text("R " + str(rad), fontsize=4, distance=1.0)
+        text = (
+            cq.Workplane(plane_name)
+            .workplane(centerOption="CenterOfBoundBox")
+            .text("R " + str(rad), fontsize=4, distance=1.0)
+        )
         assy.add(text, loc=cq.Location(loc_tup))
 
     return assy
