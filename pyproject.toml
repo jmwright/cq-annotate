@@ -17,6 +17,12 @@ classifiers = [
     "Operating System :: OS Independent",
 ]
 
+dependencies = [
+  "cadquery>=2.3.1",
+  "path",
+  "svgutils",
+]
+
 [project.urls]
 "Homepage" = "https://github.com/jmwright/cq-annotate"
 "Bug Tracker" = "https://github.com/jmwright/cq-annotate/issues"
