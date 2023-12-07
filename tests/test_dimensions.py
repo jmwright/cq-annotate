@@ -1,6 +1,6 @@
 import pytest
 import cadquery as cq
-from cq_annotate import add_circular_dimensions
+from cq_annotate.dimensioning import add_circular_dimensions
 
 
 def test_add_radius_dimension():

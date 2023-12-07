@@ -1,5 +1,5 @@
 import cadquery as cq
-from cq_annotate import add_assembly_arrows
+from cq_annotate.callouts import add_assembly_arrows
 
 # Create the first assembly component
 box1 = cq.Workplane().workplane(offset=20.0).box(10, 10, 10)

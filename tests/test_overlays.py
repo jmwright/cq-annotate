@@ -1,6 +1,6 @@
 import pytest
 import cadquery as cq
-from cq_annotate import add_safety_warning
+from cq_annotate.overlays import add_safety_warning
 
 
 def test_add_safety_waring():

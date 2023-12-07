@@ -1,5 +1,5 @@
 import cadquery as cq
-from cq_annotate import explode_assembly
+from cq_annotate.views import explode_assembly
 
 # Create the first assembly component
 box1 = cq.Workplane().workplane(offset=0.0).box(10, 10, 10)

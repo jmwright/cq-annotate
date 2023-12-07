@@ -1,6 +1,7 @@
 import pytest
 import cadquery as cq
-from cq_annotate import add_assembly_arrows, explode_assembly
+from cq_annotate.callouts import add_assembly_arrows
+from cq_annotate.views import explode_assembly
 
 
 def test_add_assembly_arrows():
