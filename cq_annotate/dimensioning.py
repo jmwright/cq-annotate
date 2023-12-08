@@ -113,6 +113,6 @@ def add_circular_dimensions(obj, arrow_scale_factor=1.0):
             .workplane(centerOption="CenterOfBoundBox")
             .text("R " + str(rad), fontsize=4, distance=1.0)
         )
-        assy.add(text, loc=cq.Location(loc_tup))
+        assy.add(text, loc=cq.Location((loc_tup[0], loc_tup[1] + 15.0, loc_tup[2])))
 
     return assy

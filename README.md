@@ -31,7 +31,7 @@ from cq_annotate.overlays import add_safety_warning
 
 * `callouts.add_assembly_arrows` - Automatically adds assembly arrows to faces in an assembly tagged "arrow". The arrow will face in the opposite direction of the normal of the face so that in something like an exploded assembly view the arrows should be indicating the direction to reassemble the assembly. The arrow size can be altered using the `arrow_scale_factor` parameter. More information can be found in the docstring for this method.
 * `views.explode_assembly` - Creates an exploded view of an assembly by translating the parts of the assembly by the `explode_loc` value defined by the designer in the `metadata` parameter of each part. This requires more work on the part of the designer, but provides the proper level of control to ensure that exploded views look correct. More information can be found in the docstring for this method.
-* `dimensioning.add_circular_dimensions` - Adds dimension objects as part of an assembly to a given model, based on tagged features. See the method's docstring for more information.
+* `dimensioning.add_circular_dimensions` - Adds diametral and radial dimension objects as part of an assembly to a given model, based on tagged features. See the method's docstring for more information.
 * `overlays.add_safety_warning` - Adds a safety overlay that can be overlaid on existing SVG content. See the method's docstring for more information.
 
 ## Examples
@@ -43,3 +43,11 @@ from cq_annotate.overlays import add_safety_warning
 * [explode_assembly_example.py](./examples/explode_assembly_example.py) - A fully commented example showing how a simple assembly can be set up to explode to show the individual components better. In the screenshot below, the two blocks would be touching at the origin if they were not set to be exploded.
 
 ![Explode Assembly Example](./docs/images/explode_assembly_example.png)
+
+* [circular_dimensions_example.py](./examples/circular_dimensions_example.py) - Shows a basic example of adding a diameter dimension (radius) to a hole.
+
+![Circular Dimension Example](./docs/images/circular_dimension_example.png)
+
+* [safety_warning_example.py](./examples/safety_warning_example.py) - Adds a customizable safety warning to an existing SVG. The `test_add_safety_warning.svg` file can be copied from the `tests` directory and used with this example.
+
+![Safety Warning Example](./docs/images/safety_warning_example.png)
