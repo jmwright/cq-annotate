@@ -15,9 +15,6 @@ def add_assembly_arrows(assy, arrow_scale_factor=1.0):
         The same assembly with the arrows added at the proper location
     """
 
-    # Sibassembly that will hold all of the assembly arrows
-    sub_assy = cq.Assembly()
-
     # Search each assembly part for a face tagged "arrow"
     for i, child in enumerate(assy.children):
         try:
@@ -48,18 +45,30 @@ def add_assembly_arrows(assy, arrow_scale_factor=1.0):
             # Rotate the arrow around its tip so that it will be in the correct position
             arrow = arrow.rotate((-10, 0, 0), (10, 0, 0), rotation_angle)
 
+            # This holds the object-arrow subassembly that is created
+            sub_assy = cq.Assembly()
+
+            # Make the original child and the sub-assembly one entity
+            sub_assy.add(
+                child,
+                name=child.name,
+                loc=child.loc,
+                color=child.color,
+                metadata=child.metadata,
+            )
+
             # Make the assembly arrow part of the assembly
             sub_assy.add(
                 arrow,
                 name="arrow_" + str(i),
                 loc=child.loc * face_loc,
                 color=cq.Color(0.0, 0.0, 0.0, 1.0),
+                metadata=child.metadata,
             )
-        except Exception:
-            pass
 
-    # If the sub-assembly
-    if len(sub_assy.children) > 0:
-        assy.add(sub_assy, name="arrows")
+            # Replace the previous single child with the child plus the arrow
+            assy.children[i] = sub_assy._copy()
+        except Exception as err:
+            pass
 
     return assy

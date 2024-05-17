@@ -18,5 +18,12 @@ def explode_assembly(assy):
 
     # Explode the stereoscope sub-assembly
     for child in assy.children:
+        # Make sure there is an explode location provided
         if "explode_loc" in child.metadata:
             child.loc = child.loc * child.metadata["explode_loc"]
+
+        # Handle assembly arrows being bundled with objects
+        for sub_child in child.children:
+            # Make sure there is an explode location provided
+            if "explode_loc" in sub_child.metadata:
+                sub_child.loc = sub_child.loc * sub_child.metadata["explode_loc"]
