@@ -31,8 +31,9 @@ def test_add_assembly_arrows():
     assy = add_assembly_arrows(assy, arrow_scale_factor=0.5)
 
     # Make sure that the assembly has the correct number of children
-    # 2 boxes + 2 arrows = 4 children
-    assert len(assy.children) == 3
+    # The arrows are added as sub assemblies with their objects
+    # 2 boxes + 2 arrows = 2 children/subassemblies
+    assert len(assy.children) == 2
 
 
 def test_explode_assembly():
