@@ -1,6 +1,6 @@
 import pytest
 import cadquery as cq
-from cq_annotate.callouts import add_assembly_arrows
+from cq_annotate.callouts import add_assembly_arrows, add_assembly_lines
 from cq_annotate.views import explode_assembly
 
 
@@ -33,6 +33,61 @@ def test_add_assembly_arrows():
     # Make sure that the assembly has the correct number of children
     # The arrows are added as sub assemblies with their objects
     # 2 boxes + 2 arrows = 2 children/subassemblies
+    assert len(assy.children) == 2
+
+
+def test_add_assembly_lines():
+    """
+    Make sure that assembly lines are added correctly to the assembly.
+    """
+
+    #
+    # Create a simple screw
+    #
+    # The threaded portion
+    screw = (
+        cq.Workplane()
+        .workplane(centerOption="CenterOfBoundBox")
+        .circle(2.5 / 2.0)
+        .extrude(6.0)
+    )
+    # Overall head shape
+    screw = (
+        screw.faces(">Z")
+        .circle(4.5 / 2.0)
+        .extrude(2.5)
+    )
+    # Add the hex drive cutout
+    screw = (
+        screw.faces(">Z")
+        .workplane(centerOption="CenterOfBoundBox")
+        .polygon(6, 2.0)
+        .cutBlind(-2.0)
+    )
+    # Tag the bottom face for an assembly arrow
+    screw.faces("<Z").tag("assembly_line")
+
+    #
+    # Create the object that the screw fits into
+    #
+    box1 = cq.Workplane().box(10, 10, 10)
+    box1 = box1.faces(">Z").hole(2.5)
+
+    #
+    # Create the assembly that puts the objects together
+    #
+    assy = cq.Assembly()
+    assy.add(box1, name="box")
+    assy.add(screw, name="screw", loc=cq.Location((0.0, 0.0, -1.0)), metadata={"explode_loc": cq.Location((0.0, 0.0, 10.0))})
+
+    #
+    # Add the assembly line
+    #
+    add_assembly_lines(assy)
+
+    # Make sure that the assembly has the correct number of children
+    # The lines are added as sub assemblies with their objects
+    # 1 box + 1 screw + 1 arrow = 2 children/subassemblies
     assert len(assy.children) == 2
 
 
