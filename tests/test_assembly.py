@@ -52,11 +52,7 @@ def test_add_assembly_lines():
         .extrude(6.0)
     )
     # Overall head shape
-    screw = (
-        screw.faces(">Z")
-        .circle(4.5 / 2.0)
-        .extrude(2.5)
-    )
+    screw = screw.faces(">Z").circle(4.5 / 2.0).extrude(2.5)
     # Add the hex drive cutout
     screw = (
         screw.faces(">Z")
@@ -78,7 +74,12 @@ def test_add_assembly_lines():
     #
     assy = cq.Assembly()
     assy.add(box1, name="box")
-    assy.add(screw, name="screw", loc=cq.Location((0.0, 0.0, -1.0)), metadata={"explode_loc": cq.Location((0.0, 0.0, 10.0))})
+    assy.add(
+        screw,
+        name="screw",
+        loc=cq.Location((0.0, 0.0, -1.0)),
+        metadata={"explode_loc": cq.Location((0.0, 0.0, 10.0))},
+    )
 
     #
     # Add the assembly line
