@@ -22,8 +22,18 @@ def explode_assembly(assy):
         if "explode_loc" in child.metadata:
             child.loc = child.loc * child.metadata["explode_loc"]
 
+        # Also accomodate the "explode_translation" metadata key
+        if "explode_translation" in child.metadata:
+            child.loc = child.loc * child.metadata["explode_translation"]
+
         # Handle assembly arrows being bundled with objects
         for sub_child in child.children:
             # Make sure there is an explode location provided
             if "explode_loc" in sub_child.metadata:
                 sub_child.loc = sub_child.loc * sub_child.metadata["explode_loc"]
+
+            # Also accomodate the "explode_translation" metadata key
+            if "explode_translation" in sub_child.metadata:
+                sub_child.loc = (
+                    sub_child.loc * sub_child.metadata["explode_translation"]
+                )
