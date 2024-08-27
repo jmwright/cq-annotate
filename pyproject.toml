@@ -11,11 +11,14 @@ authors = [
 ]
 description = "An annotation extension designed to work with the CadQuery API"
 readme = "README.md"
-requires-python = ">=3.8"
+requires-python = ">=3.9"
 classifiers = [
     "Programming Language :: Python :: 3",
     "Operating System :: OS Independent",
 ]
+
+[tool.hatch.metadata]
+allow-direct-references = true
 
 dependencies = [
   "cadquery@git+https://github.com/CadQuery/cadquery.git",
