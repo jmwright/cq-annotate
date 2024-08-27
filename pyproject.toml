@@ -17,9 +17,6 @@ classifiers = [
     "Operating System :: OS Independent",
 ]
 
-[tool.hatch.metadata]
-allow-direct-references = true
-
 dependencies = [
   "cadquery@git+https://github.com/CadQuery/cadquery.git@master",
   "path",
@@ -35,3 +32,6 @@ dev = [
 [project.urls]
 "Homepage" = "https://github.com/jmwright/cq-annotate"
 "Bug Tracker" = "https://github.com/jmwright/cq-annotate/issues"
+
+[tool.hatch.metadata]
+allow-direct-references = true
