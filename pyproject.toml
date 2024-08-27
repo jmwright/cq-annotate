@@ -19,6 +19,12 @@ classifiers = [
 
 dependencies = [
   "cadquery@git+https://github.com/CadQuery/cadquery.git@master",
+  "cadquery-ocp>=7.7.0a0,<7.8",
+  "ezdxf",
+  "multimethod>=1.11,<2.0",
+  "nlopt",
+  "typish",
+  "casadi",
   "path",
   "svgutils",
 ]
