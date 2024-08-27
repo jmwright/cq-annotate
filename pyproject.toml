@@ -18,7 +18,7 @@ classifiers = [
 ]
 
 dependencies = [
-  "cadquery>=2.3.1",
+  "cadquery@git+https://github.com/CadQuery/cadquery.git",
   "path",
   "svgutils",
 ]
@@ -26,8 +26,7 @@ dependencies = [
 [project.optional-dependencies]
 dev = [
   "pytest",
-  "black==19.10b0",
-  "click==8.0.4"
+  "black@git+https://github.com/cadquery/black.git@cq",
 ]
 
 [project.urls]
