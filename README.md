@@ -40,6 +40,10 @@ from cq_annotate.overlays import add_safety_warning
 
 ![Assembly Arrows Example](./docs/images/assembly_arrows_example.png)
 
+* [add_assembly_lines_example.py](./examples/add_assembly_lines_example.py) - Example showing a simple example of how to use assembly lines.
+
+![Assembly Lines Example](./docs/images/assembly_lines_example.png)
+
 * [explode_assembly_example.py](./examples/explode_assembly_example.py) - A fully commented example showing how a simple assembly can be set up to explode to show the individual components better. In the screenshot below, the two blocks would be touching at the origin if they were not set to be exploded.
 
 ![Explode Assembly Example](./docs/images/explode_assembly_example.png)
