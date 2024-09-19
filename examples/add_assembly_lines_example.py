@@ -19,7 +19,12 @@ assy = cq.Assembly()
 
 # Add the assembly components
 # The name parameter is required so that tagged faces can be found
-assy.add(screw, name="screw", color=cq.Color(1, 0, 0, 1), metadata={"explode_loc": cq.Location((0, 0, 20))})
+assy.add(
+    screw,
+    name="screw",
+    color=cq.Color(1, 0, 0, 1),
+    metadata={"explode_loc": cq.Location((0, 0, 20))},
+)
 assy.add(box, name="box", color=cq.Color(0, 1, 0, 1))
 
 # Explode the assembly so that we have a reason to use the assembly lines
