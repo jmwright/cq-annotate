@@ -102,13 +102,15 @@ def add_assembly_lines(assy, line_diameter=0.5, line_length=None):
         # Figure out the correct line length
         if line_length is None:
             # Get the explode translation tuple
-            explode_translation = (child.metadata["explode_loc"]
-                                        if "explode_loc" in child.metadata.keys()
-                                        else child.metadata["explode_translation"])
+            explode_translation = (
+                child.metadata["explode_loc"]
+                if "explode_loc" in child.metadata.keys()
+                else child.metadata["explode_translation"]
+            )
             explode_translation = explode_translation.toTuple()[0]
 
             # Calculate the length of the assembly line based on the amount of translation
-            line_length = sqrt(sum([i**2 for i in explode_translation]))
+            line_length = sqrt(sum([i ** 2 for i in explode_translation]))
 
         # Create the line object
         line = cq.Workplane().circle(line_diameter / 2.0).extrude(line_length)
@@ -138,7 +140,9 @@ def add_assembly_lines(assy, line_diameter=0.5, line_length=None):
         # Make the assembly line part of the assembly
         new_meta = child.metadata.copy()
         new_meta["edge_color"] = cq.Color(1.0, 0.0, 0.0, 0.0)
-        new_meta["edge_width"] = 3  # Anything less than 3 will cause the custom color to be ignored
+        new_meta[
+            "edge_width"
+        ] = 3  # Anything less than 3 will cause the custom color to be ignored
         sub_assy.add(
             line,
             name="assembly_line_" + str(i),
