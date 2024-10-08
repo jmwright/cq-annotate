@@ -109,8 +109,14 @@ def add_assembly_lines(assy, line_diameter=0.5, line_length=None):
             )
             explode_translation = explode_translation.toTuple()[0]
 
-            # Calculate the length of the assembly line based on the amount of translation
-            line_length = sqrt(sum([i ** 2 for i in explode_translation]))
+            # Allow the user to set a custom line length
+            if "assembly_line_length" in child.metadata.keys():
+                print(child.metadata["assembly_line_length"])
+                line_length_tuple = child.metadata["assembly_line_length"]
+                line_length = sqrt(sum([i ** 2 for i in line_length_tuple]))
+            else:
+                # Calculate the length of the assembly line based on the amount of translation
+                line_length = sqrt(sum([i ** 2 for i in explode_translation]))
 
         # Create the line object
         line = cq.Workplane().circle(line_diameter / 2.0).extrude(line_length)
