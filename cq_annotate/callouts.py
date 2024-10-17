@@ -111,7 +111,6 @@ def add_assembly_lines(assy, line_diameter=0.5, line_length=None):
 
             # Allow the user to set a custom line length
             if "assembly_line_length" in child.metadata.keys():
-                print(child.metadata["assembly_line_length"])
                 line_length_tuple = child.metadata["assembly_line_length"]
                 line_length = sqrt(sum([i ** 2 for i in line_length_tuple]))
             else:
@@ -119,17 +118,11 @@ def add_assembly_lines(assy, line_diameter=0.5, line_length=None):
                 line_length = sqrt(sum([i ** 2 for i in explode_translation]))
 
         # Create the line object
-        line = cq.Workplane().circle(line_diameter / 2.0).extrude(line_length)
-
-        # Figure out the angle between the normal vector of the face and the length axis of the line
-        face_normal = face[1].normalAt(cq.Vector(0, 0, 0))
-        rotation_angle = face_normal.wrapped.AngleWithRef(
-            cq.Vector(0, 0, 1).wrapped, cq.Vector(-1, -1, -1).wrapped
+        line = cq.Workplane(child.obj.workplaneFromTagged("assembly_line").plane)
+        line.zDir = face[1].normalAt(cq.Vector(0, 0, 0))
+        line = (
+            line.workplane(invert=True).circle(line_diameter / 2.0).extrude(line_length)
         )
-        rotation_angle = degrees(rotation_angle)
-
-        # Rotate the line around its tip so that it will be in the correct position
-        line = line.rotate((-10, 0, 0), (10, 0, 0), rotation_angle)
 
         # This holds the object-line subassembly that is created
         sub_assy = cq.Assembly()
@@ -145,14 +138,14 @@ def add_assembly_lines(assy, line_diameter=0.5, line_length=None):
 
         # Make the assembly line part of the assembly
         new_meta = child.metadata.copy()
-        new_meta["edge_color"] = cq.Color(1.0, 0.0, 0.0, 0.0)
+        new_meta["edge_color"] = cq.Color(1.0, 0.0, 0.0, 1.0)
         new_meta[
             "edge_width"
         ] = 3  # Anything less than 3 will cause the custom color to be ignored
         sub_assy.add(
             line,
             name="assembly_line_" + str(i),
-            loc=child.loc * face_loc,
+            loc=child.loc,
             color=cq.Color(1.0, 0.0, 0.0, 1.0),
             metadata=new_meta,
         )
