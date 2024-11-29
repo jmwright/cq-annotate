@@ -36,22 +36,27 @@ from cq_annotate.overlays import add_safety_warning
 
 ## Examples
 
+### Assembly Arrows
 * [add_assembly_arrows_example.py](./examples/add_assembly_arrows_example.py) - A fully commented example showing a simple example of how to use assembly arrows.
 
 ![Assembly Arrows Example](./docs/images/assembly_arrows_example.png)
 
+### Assembly Lines
 * [add_assembly_lines_example.py](./examples/add_assembly_lines_example.py) - Example showing a simple example of how to use assembly lines.
 
 ![Assembly Lines Example](./docs/images/assembly_lines_example.png)
 
+### Explode Assembly
 * [explode_assembly_example.py](./examples/explode_assembly_example.py) - A fully commented example showing how a simple assembly can be set up to explode to show the individual components better. In the screenshot below, the two blocks would be touching at the origin if they were not set to be exploded.
 
 ![Explode Assembly Example](./docs/images/explode_assembly_example.png)
 
+### Circular Dimensions
 * [circular_dimensions_example.py](./examples/circular_dimensions_example.py) - Shows a basic example of adding a diameter dimension (radius) to a hole.
 
 ![Circular Dimension Example](./docs/images/circular_dimension_example.png)
 
+### Safety Warning
 * [safety_warning_example.py](./examples/safety_warning_example.py) - Adds a customizable safety warning to an existing SVG. The `test_add_safety_warning.svg` file can be copied from the `tests` directory and used with this example.
 
 ![Safety Warning Example](./docs/images/safety_warning_example.png)
