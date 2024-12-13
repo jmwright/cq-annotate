@@ -18,7 +18,7 @@ classifiers = [
 ]
 
 dependencies = [
-  "cadquery@git+https://github.com/CadQuery/cadquery.git",
+  "cadquery",
   "svgutils",
 ]
 
