@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "cq-annotate"
-version = "0.0.1"
+version = "1.0.0"
 license = "Apache-2.0"
 authors = [
   { name="Jeremy Wright" },
@@ -18,14 +18,14 @@ classifiers = [
 ]
 
 dependencies = [
-  "cadquery",
+  "cadquery@git+https://github.com/CadQuery/cadquery.git",
   "svgutils",
 ]
 
 [project.optional-dependencies]
 dev = [
   "pytest",
-  "black@git+https://github.com/cadquery/black.git@cq",
+  "black",
 ]
 
 [project.urls]
