@@ -46,11 +46,13 @@ def explode_assembly(assy, depth=3):
                         # Make sure there is an explode location provided
                         if "explode_loc" in sub_sub_child.metadata:
                             sub_sub_child.loc = (
-                                sub_sub_child.loc * sub_sub_child.metadata["explode_loc"]
+                                sub_sub_child.loc
+                                * sub_sub_child.metadata["explode_loc"]
                             )
 
                         # Also accomodate the "explode_translation" metadata key
                         if "explode_translation" in sub_sub_child.metadata:
                             sub_sub_child.loc = (
-                                sub_sub_child.loc * sub_sub_child.metadata["explode_translation"]
+                                sub_sub_child.loc
+                                * sub_sub_child.metadata["explode_translation"]
                             )
