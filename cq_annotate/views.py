@@ -1,4 +1,4 @@
-def explode_assembly(assy):
+def explode_assembly(assy, depth=3):
     """
     Explodes an assembly by moving the parts away in predefined directions and distances
     that should be included in each assembly child's metadata.
@@ -16,7 +16,7 @@ def explode_assembly(assy):
         Nothing, modifies the assembly in-place
     """
 
-    # Explode the stereoscope sub-assembly
+    # Explode the top-level assembly
     for child in assy.children:
         # Make sure there is an explode location provided
         if "explode_loc" in child.metadata:
@@ -26,14 +26,31 @@ def explode_assembly(assy):
         if "explode_translation" in child.metadata:
             child.loc = child.loc * child.metadata["explode_translation"]
 
-        # Handle assembly arrows being bundled with objects
-        for sub_child in child.children:
-            # Make sure there is an explode location provided
-            if "explode_loc" in sub_child.metadata:
-                sub_child.loc = sub_child.loc * sub_child.metadata["explode_loc"]
+        # Allow the user to choose which depth they want to explode to
+        if depth >= 2:
+            # Handle sub-assemblies in a clumsy way
+            for sub_child in child.children:
+                # Make sure there is an explode location provided
+                if "explode_loc" in sub_child.metadata:
+                    sub_child.loc = sub_child.loc * sub_child.metadata["explode_loc"]
 
-            # Also accomodate the "explode_translation" metadata key
-            if "explode_translation" in sub_child.metadata:
-                sub_child.loc = (
-                    sub_child.loc * sub_child.metadata["explode_translation"]
-                )
+                # Also accomodate the "explode_translation" metadata key
+                if "explode_translation" in sub_child.metadata:
+                    sub_child.loc = (
+                        sub_child.loc * sub_child.metadata["explode_translation"]
+                    )
+
+                # Allow the user to choose which depth they want to explode to
+                if depth >= 3:
+                    for sub_sub_child in sub_child.children:
+                        # Make sure there is an explode location provided
+                        if "explode_loc" in sub_sub_child.metadata:
+                            sub_sub_child.loc = (
+                                sub_sub_child.loc * sub_sub_child.metadata["explode_loc"]
+                            )
+
+                        # Also accomodate the "explode_translation" metadata key
+                        if "explode_translation" in sub_sub_child.metadata:
+                            sub_sub_child.loc = (
+                                sub_sub_child.loc * sub_sub_child.metadata["explode_translation"]
+                            )
