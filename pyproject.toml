@@ -19,13 +19,6 @@ classifiers = [
 
 dependencies = [
   "cadquery",
-  "cadquery-ocp>=7.7.0a0,<7.8",
-  "ezdxf",
-  "multimethod>=1.11,<2.0",
-  "nlopt>=2.9.0,<3.0",
-  "typish",
-  "casadi",
-  "path",
   "svgutils",
 ]
 
