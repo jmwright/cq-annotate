@@ -74,7 +74,7 @@ def add_assembly_arrows(assy, arrow_scale_factor=1.0):
     return assy
 
 
-def add_assembly_lines(assy, line_diameter=0.5, line_length=None):
+def add_assembly_lines(assy, line_diameter=0.5, line_length=None, selective_list=None):
     """
     Adds 3D lines (cylinders) to the assembly at the locations of faces tagged with "assembly_line".
     The lines will utilize the explode_loc distance to determine the length of the line.
@@ -91,6 +91,10 @@ def add_assembly_lines(assy, line_diameter=0.5, line_length=None):
 
     # Search each assembly part for a face tagged "assembly_line"
     for i, child in enumerate(assy.children):
+        # Filter out parts that are not in the selective explode list
+        if selective_list is not None and child.name not in selective_list:
+            continue
+
         # Get the face location so that we can offset the line properly
         try:
             face = child._query(child.name + "?assembly_line")
